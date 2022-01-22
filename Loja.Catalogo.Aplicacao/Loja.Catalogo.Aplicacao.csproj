@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="automapper" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Loja.Catalogo.Dominio\Loja.Catalogo.Dominio.csproj" />
+    <ProjectReference Include="..\Loja.Core\Loja.Core.csproj" />
+    <ProjectReference Include="..\Loja.Catalogo.Data\Loja.Catalogo.Data.csproj" />
+  </ItemGroup>
+
+</Project>
