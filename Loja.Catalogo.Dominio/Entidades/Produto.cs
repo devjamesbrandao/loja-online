@@ -40,18 +40,21 @@ namespace Loja.Catalogo.Dominio.Entidades
         public void AlterarCategoria(Categoria categoria)
         {
             Categoria = categoria;
+
             CategoriaId = categoria.Id;
         }
 
         public void AlterarDescricao(string descricao)
         {
             Validacoes.ValidarSeVazio(descricao, "O campo Descricao do produto não pode estar vazio");
+
             Descricao = descricao;
         }
 
         public void DebitarEstoque(int quantidade)
         {
             if (quantidade < 0) quantidade *= -1;
+            
             if (!PossuiEstoque(quantidade)) throw new ExcecaoDominio("Estoque insuficiente");
             QuantidadeEstoque -= quantidade;
         }
