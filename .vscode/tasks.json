@@ -32,9 +32,8 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/Loja.WebApp.MVC/Loja.WebApp.MVC.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "--project",
+                "${workspaceFolder}/Loja.WebApp.MVC/Loja.WebApp.MVC.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

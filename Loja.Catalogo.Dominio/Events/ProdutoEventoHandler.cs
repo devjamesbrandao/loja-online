@@ -14,6 +14,7 @@ namespace Loja.Catalogo.Dominio.Events
 
         public async Task Handle(ProdutoAbaixoEstoqueEvent mensagem, CancellationToken cancellationToken)
         {
+            // Comprar mais produto
             var produto = await _produtoRepository.ObterPorId(mensagem.IdAgregado);
         }
     }
