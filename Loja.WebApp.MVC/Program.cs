@@ -1,5 +1,7 @@
+using Loja.Catalogo.Aplicacao.Automapper;
 using Loja.Catalogo.Data.Context;
 using Loja.WebApp.MVC.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -31,6 +33,10 @@ builder.Services.AddDbContext<CatalogoContext>(
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddMvc();
+
+builder.Services.AddAutoMapper(typeof(EntidadeParaDTOProfile), typeof(DTOParaEntidadeProfile));
+
+builder.Services.AddMediatR(typeof(Program));
 
 var app = builder.Build();
 
