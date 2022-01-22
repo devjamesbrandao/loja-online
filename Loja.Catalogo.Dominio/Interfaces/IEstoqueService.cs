@@ -1,6 +1,6 @@
 namespace Loja.Catalogo.Dominio.Interfaces
 {
-    public interface IEstoqueService
+    public interface IEstoqueService : IDisposable
     {
         Task<bool> DebitarEstoque(Guid produtoId, int quantidade);
 
