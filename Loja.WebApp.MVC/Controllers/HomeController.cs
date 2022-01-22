@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Loja.WebApp.MVC.Models;
+using Microsoft.Extensions.Logging;
 
 namespace Loja.WebApp.MVC.Controllers;
 
