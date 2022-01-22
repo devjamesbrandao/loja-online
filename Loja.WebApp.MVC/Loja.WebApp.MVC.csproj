@@ -4,6 +4,7 @@
     <ProjectReference Include="..\Loja.Core\Loja.Core.csproj" />
     <ProjectReference Include="..\Loja.Catalogo.Dominio\Loja.Catalogo.Dominio.csproj" />
     <ProjectReference Include="..\Loja.Catalogo.Data\Loja.Catalogo.Data.csproj" />
+    <ProjectReference Include="..\Loja.Catalogo.Aplicacao\Loja.Catalogo.Aplicacao.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
