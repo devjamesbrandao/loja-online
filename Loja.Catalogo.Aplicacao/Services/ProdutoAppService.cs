@@ -6,7 +6,7 @@ using Loja.Core.Exceptions;
 
 namespace Loja.Catalogo.Aplicacao.Services
 {
-    public class ProdutoAppService
+    public class ProdutoAppService : IProdutoAppService
     {
         private readonly IProdutoRepository _produtoRepository;
         private readonly IEstoqueService _estoqueService;
