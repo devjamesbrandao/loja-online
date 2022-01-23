@@ -2,8 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Loja.Core\Loja.Core.csproj" />
-    <ProjectReference Include="..\Loja.Catalogo.Dominio\Loja.Catalogo.Dominio.csproj" />
     <ProjectReference Include="..\Loja.Catalogo.Data\Loja.Catalogo.Data.csproj" />
+    <ProjectReference Include="..\Loja.Catalogo.Dominio\Loja.Catalogo.Dominio.csproj" />
     <ProjectReference Include="..\Loja.Catalogo.Aplicacao\Loja.Catalogo.Aplicacao.csproj" />
   </ItemGroup>
 
@@ -12,14 +12,13 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
   </ItemGroup>
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
 </Project>
