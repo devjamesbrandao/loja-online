@@ -1,23 +1,24 @@
 using Loja.Catalogo.Aplicacao.Automapper;
+using Loja.Catalogo.Aplicacao.Services;
 using Loja.Catalogo.Data.Context;
+using Loja.Catalogo.Data.Repository;
+using Loja.Catalogo.Dominio.Events;
+using Loja.Catalogo.Dominio.Interfaces;
+using Loja.Catalogo.Dominio.Services;
+using Loja.Core.Comunicacao;
 using Loja.WebApp.MVC.Data;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.Configure<CookiePolicyOptions>(options => 
+builder.Services.Configure<CookiePolicyOptions>(options =>
 {
+    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
     options.CheckConsentNeeded = context => true;
     options.MinimumSameSitePolicy = SameSiteMode.None;
 });
@@ -32,11 +33,23 @@ builder.Services.AddDbContext<CatalogoContext>(
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddMvc();
-
 builder.Services.AddAutoMapper(typeof(EntidadeParaDTOProfile), typeof(DTOParaEntidadeProfile));
 
 builder.Services.AddMediatR(typeof(Program));
+
+//Mediator
+builder.Services.AddScoped<IMediatorHandler, MediatorHandler>();
+
+// Catalogo
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+
+builder.Services.AddScoped<IProdutoAppService, ProdutoAppService>();
+
+builder.Services.AddScoped<IEstoqueService, EstoqueService>();
+
+builder.Services.AddScoped<CatalogoContext>();
+
+builder.Services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventoHandler>();
 
 var app = builder.Build();
 
@@ -52,9 +65,9 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-app.UseAuthentication();
-
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
