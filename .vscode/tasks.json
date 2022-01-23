@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Loja.WebApp.MVC/Loja.WebApp.MVC.csproj",
+                //"${workspaceFolder}/Loja.WebApp.MVC/Loja.WebApp.MVC.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
