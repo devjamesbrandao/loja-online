@@ -6,6 +6,10 @@ namespace Loja.Catalogo.Data.Context
 {
     public class CatalogoContext : DbContext, IUnitOfWork
     {
+        public CatalogoContext()
+        {
+            
+        }
         public CatalogoContext(DbContextOptions<CatalogoContext> options)
             : base(options) { }
 
