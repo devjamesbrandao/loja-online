@@ -19,7 +19,7 @@ namespace Loja.Core.ObjetosDominio
             return Id.Equals(compareTo.Id);
         }
 
-        public static bool operator ==(Entidade a, Entidade b)
+        public static bool operator == (Entidade a, Entidade b)
         {
             if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
                 return true;
