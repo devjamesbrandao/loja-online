@@ -1,4 +1,5 @@
 using Loja.Catalogo.Aplicacao.DTO;
+using Loja.Catalogo.Dominio.Entidades;
 
 namespace Loja.Catalogo.Aplicacao.Services
 {
@@ -9,6 +10,8 @@ namespace Loja.Catalogo.Aplicacao.Services
         Task<IEnumerable<ProdutoDTO>> ObterTodos();
         Task<IEnumerable<CategoriaDTO>> ObterCategorias();
 
+        Task<int> ObterAsync(Guid id);
+        Task<int> ObterQuantidadeEstoque(Guid id);
         Task AdicionarProduto(ProdutoDTO ProdutoDTO);
         Task AtualizarProduto(ProdutoDTO ProdutoDTO);
 
