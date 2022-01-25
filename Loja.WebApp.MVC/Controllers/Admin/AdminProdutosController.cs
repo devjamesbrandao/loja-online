@@ -1,5 +1,6 @@
 using Loja.Catalogo.Aplicacao.DTO;
 using Loja.Catalogo.Aplicacao.Services;
+using Loja.Catalogo.Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Loja.WebApp.MVC.Controllers.Admin
@@ -48,9 +49,9 @@ namespace Loja.WebApp.MVC.Controllers.Admin
         [Route("editar-produto")]
         public async Task<IActionResult> AtualizarProduto(Guid id, ProdutoDTO produtoViewModel)
         {
-            var produto = await _produtoAppService.ObterPorId(id);
+            var qtdEstoque = await _produtoAppService.ObterQuantidadeEstoque(id);
 
-            produtoViewModel.QuantidadeEstoque = produto.QuantidadeEstoque;
+            produtoViewModel.QuantidadeEstoque = qtdEstoque;
 
             ModelState.Remove("QuantidadeEstoque");
 
