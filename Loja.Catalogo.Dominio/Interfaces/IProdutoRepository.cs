@@ -9,7 +9,7 @@ namespace Loja.Catalogo.Dominio.Interfaces
         Task<Produto> ObterPorId(Guid id);
         Task<IEnumerable<Produto>> ObterPorCategoria(int codigo);
         Task<IEnumerable<Categoria>> ObterCategorias();
-
+        Task<int> RetornarQuantidadeEstoque(Guid id);
         void Adicionar(Produto produto);
         void Atualizar(Produto produto);
 
