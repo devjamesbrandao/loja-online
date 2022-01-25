@@ -29,7 +29,21 @@ namespace Loja.Catalogo.Aplicacao.Services
 
         public async Task<ProdutoDTO> ObterPorId(Guid id)
         {
+            var produto = await _produtoRepository.ObterPorId(id);
+
             return _mapper.Map<ProdutoDTO>(await _produtoRepository.ObterPorId(id));
+        }
+
+        public async Task<int> ObterAsync(Guid id)
+        {
+            var prod = await _produtoRepository.ObterPorId(id);
+
+            return prod.QuantidadeEstoque;
+        }
+
+        public async Task<int> ObterQuantidadeEstoque(Guid id)
+        {
+            return await _produtoRepository.RetornarQuantidadeEstoque(id);
         }
 
         public async Task<IEnumerable<ProdutoDTO>> ObterTodos()
@@ -45,6 +59,7 @@ namespace Loja.Catalogo.Aplicacao.Services
         public async Task AdicionarProduto(ProdutoDTO ProdutoDTO)
         {
             var produto = _mapper.Map<Produto>(ProdutoDTO);
+
             _produtoRepository.Adicionar(produto);
 
             await _produtoRepository.UnitOfWork.Commit();
@@ -53,6 +68,7 @@ namespace Loja.Catalogo.Aplicacao.Services
         public async Task AtualizarProduto(ProdutoDTO ProdutoDTO)
         {
             var produto = _mapper.Map<Produto>(ProdutoDTO);
+
             _produtoRepository.Atualizar(produto);
 
             await _produtoRepository.UnitOfWork.Commit();
