@@ -5,7 +5,7 @@ namespace Loja.Core.ObjetosDominio
 {
     public abstract class EventoDominio : Evento
     {
-        public DateTime Data { get; private set; }
+        public new DateTime Data { get; private set; }
 
         protected EventoDominio(Guid idagregado)
         {
