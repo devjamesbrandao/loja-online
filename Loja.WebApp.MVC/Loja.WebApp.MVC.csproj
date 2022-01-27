@@ -5,6 +5,9 @@
     <ProjectReference Include="..\Loja.Catalogo.Data\Loja.Catalogo.Data.csproj" />
     <ProjectReference Include="..\Loja.Catalogo.Dominio\Loja.Catalogo.Dominio.csproj" />
     <ProjectReference Include="..\Loja.Catalogo.Aplicacao\Loja.Catalogo.Aplicacao.csproj" />
+    <ProjectReference Include="..\Loja.Venda.Dominio\Loja.Venda.Dominio.csproj" />
+    <ProjectReference Include="..\Loja.Venda.Aplicacao\Loja.Venda.Aplicacao.csproj" />
+    <ProjectReference Include="..\Loja.Venda.Data\Loja.Venda.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +24,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
