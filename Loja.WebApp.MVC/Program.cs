@@ -28,7 +28,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 );
 
 builder.Services.AddDbContext<CatalogoContext>(
-    options => {options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); options.EnableSensitiveDataLogging();}
+    options => {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
+        options.EnableSensitiveDataLogging();
+    }
 );
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
