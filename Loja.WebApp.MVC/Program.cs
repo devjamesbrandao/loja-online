@@ -6,6 +6,9 @@ using Loja.Catalogo.Dominio.Events;
 using Loja.Catalogo.Dominio.Interfaces;
 using Loja.Catalogo.Dominio.Services;
 using Loja.Core.Comunicacao;
+using Loja.Venda.Data.Context;
+using Loja.Venda.Data.Repository;
+using Loja.Venda.Dominio.Interfaces;
 using Loja.WebApp.MVC.Data;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -53,6 +56,9 @@ builder.Services.AddScoped<IEstoqueService, EstoqueService>();
 builder.Services.AddScoped<CatalogoContext>();
 
 builder.Services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventoHandler>();
+
+// Vendas
+builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
 var app = builder.Build();
 
