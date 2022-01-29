@@ -39,6 +39,13 @@ builder.Services.AddDbContext<CatalogoContext>(
     }
 );
 
+builder.Services.AddDbContext<VendasContext>(
+    options => {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
+        options.EnableSensitiveDataLogging();
+    }
+);
+
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddAutoMapper(typeof(EntidadeParaDTOProfile), typeof(DTOParaEntidadeProfile));
