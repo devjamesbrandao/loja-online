@@ -60,6 +60,8 @@ builder.Services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, Prod
 // Vendas
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
+builder.Services.AddScoped<VendasContext>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
