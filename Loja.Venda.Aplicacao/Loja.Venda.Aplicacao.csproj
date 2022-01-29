@@ -2,6 +2,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Loja.Core\Loja.Core.csproj" />
+    <ProjectReference Include="..\Loja.Venda.Data\Loja.Venda.Data.csproj" />
+    <ProjectReference Include="..\Loja.Venda.Dominio\Loja.Venda.Dominio.csproj" />
   </ItemGroup>
 
   <ItemGroup>
