@@ -62,7 +62,7 @@ namespace Loja.Venda.Aplicacao.Handler
 
         private bool ValidarComando(Comando message)
         {
-            if (message.EhValido()) return true;
+            if(message.EhValido()) return true;
 
             foreach (var error in message.ValidationResult.Errors)
             {
