@@ -49,12 +49,15 @@ namespace Loja.Venda.Data.Context
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
+            // Ignorar evento
             modelBuilder.Ignore<Evento>();
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(VendasContext).Assembly);
-
+            
+            // Comportamento ao excluir entidades chaves
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
+            // Adicionando sequência
             modelBuilder.HasSequence<int>("MinhaSequencia").StartsAt(1000).IncrementsBy(1);
             
             base.OnModelCreating(modelBuilder);
