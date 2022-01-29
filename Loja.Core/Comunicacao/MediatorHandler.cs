@@ -16,5 +16,10 @@ namespace Loja.Core.Comunicacao
         {
             await _mediator.Publish(evento);
         }
+
+        public async Task<bool> EnviarComando<T>(T comando) where T : Comando
+        {
+            return await _mediator.Send(comando);
+        }
     }
 }
