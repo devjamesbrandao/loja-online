@@ -1,4 +1,5 @@
 using Loja.Core.Message;
+using Loja.Core.Message.Notificacoes;
 using MediatR;
 
 namespace Loja.Core.Comunicacao
@@ -20,6 +21,11 @@ namespace Loja.Core.Comunicacao
         public async Task<bool> EnviarComando<T>(T comando) where T : Comando
         {
             return await _mediator.Send(comando);
+        }
+
+        public async Task PublicarNotificacao<T>(T notificacao) where T : NotificacaoDominio
+        {
+            await _mediator.Publish(notificacao);
         }
     }
 }
