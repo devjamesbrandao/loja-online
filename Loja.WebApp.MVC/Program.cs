@@ -9,6 +9,7 @@ using Loja.Core.Comunicacao;
 using Loja.Core.Message.Notificacoes;
 using Loja.Venda.Aplicacao.Events;
 using Loja.Venda.Aplicacao.Handler;
+using Loja.Venda.Aplicacao.Queries;
 using Loja.Venda.Data.Context;
 using Loja.Venda.Data.Repository;
 using Loja.Venda.Dominio.Interfaces;
@@ -73,6 +74,8 @@ builder.Services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, Prod
 
 // Vendas
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
+
+builder.Services.AddScoped<IPedidoQueries, PedidoQueries>();
 
 builder.Services.AddScoped<VendasContext>();
 
