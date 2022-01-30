@@ -1,12 +1,34 @@
+using Loja.Core.Message;
+
 namespace Loja.Core.ObjetosDominio
 {
     public abstract class Entidade
     {
         public Guid Id { get; set; }
 
+        private List<Evento> _notificacoes;
+        public IReadOnlyCollection<Evento> Notificacoes => _notificacoes?.AsReadOnly();
+
         protected Entidade()
         {
             Id = Guid.NewGuid();
+        }
+
+        public void AdicionarEvento(Evento evento)
+        {
+            _notificacoes = _notificacoes ?? new List<Evento>();
+
+            _notificacoes.Add(evento);
+        }
+
+        public void RemoverEvento(Evento eventItem)
+        {
+            _notificacoes?.Remove(eventItem);
+        }
+
+        public void LimparEventos()
+        {
+            _notificacoes?.Clear();
         }
 
         public override bool Equals(object obj)
