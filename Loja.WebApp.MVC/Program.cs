@@ -81,8 +81,6 @@ builder.Services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, Pe
 // Eventos
 builder.Services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
 
-builder.Services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
