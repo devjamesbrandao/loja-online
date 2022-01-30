@@ -1,6 +1,7 @@
 using Loja.Catalogo.Aplicacao.Services;
 using Loja.Core.Comunicacao;
 using Loja.Core.Message.Notificacoes;
+using Loja.Venda.Aplicacao.Queries;
 using Loja.Vendas.Aplicacao.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,17 +12,24 @@ namespace Loja.WebApp.MVC.Controllers
     {
         private readonly IProdutoAppService _produtoAppService;
         private readonly IMediatorHandler _mediatorHandler;
+        private readonly IPedidoQueries _pedidoQueries;
 
         public CarrinhoController(
             INotificationHandler<NotificacaoDominio> notifications,
             IProdutoAppService produtoAppService, 
-            IMediatorHandler mediatorHandler
+            IMediatorHandler mediatorHandler,
+            IPedidoQueries pedidoQueries
         ) : base(notifications, mediatorHandler)
         {
             _produtoAppService = produtoAppService;
             _mediatorHandler = mediatorHandler;
         }
 
+        [Route("meu-carrinho")]
+        public async Task<IActionResult> Index()
+        {
+            return View(await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
+        }
 
         [HttpPost]
         [Route("meu-carrinho")]
