@@ -6,6 +6,7 @@ using Loja.Catalogo.Dominio.Events;
 using Loja.Catalogo.Dominio.Interfaces;
 using Loja.Catalogo.Dominio.Services;
 using Loja.Core.Comunicacao;
+using Loja.Core.Message.Notificacoes;
 using Loja.Venda.Aplicacao.Handler;
 using Loja.Venda.Data.Context;
 using Loja.Venda.Data.Repository;
@@ -51,6 +52,9 @@ builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<App
 builder.Services.AddAutoMapper(typeof(EntidadeParaDTOProfile), typeof(DTOParaEntidadeProfile));
 
 builder.Services.AddMediatR(typeof(Program));
+
+// Notificacoes
+builder.Services.AddScoped<INotificationHandler<NotificacaoDominio>, NotificacaoDominioHandler>();
 
 //Mediator
 builder.Services.AddScoped<IMediatorHandler, MediatorHandler>();
