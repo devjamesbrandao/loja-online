@@ -1,6 +1,7 @@
 using Loja.Core.Comunicacao;
 using Loja.Core.Data;
 using Loja.Core.Message;
+using Loja.Venda.Data.Extension;
 using Loja.Venda.Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +39,7 @@ namespace Loja.Venda.Data.Context
             
             var sucesso = await base.SaveChangesAsync() > 0;
 
-            // if(sucesso) await _mediatorHandler.PublicarEventos(this);
+            if(sucesso) await _mediatorHandler.PublicarEventos(this);
 
             return sucesso;
         }
