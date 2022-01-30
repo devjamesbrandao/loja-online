@@ -1,6 +1,7 @@
 using Loja.Core.Comunicacao;
 using Loja.Core.Message;
 using Loja.Core.Message.Notificacoes;
+using Loja.Venda.Aplicacao.Events;
 using Loja.Venda.Dominio.Entidades;
 using Loja.Venda.Dominio.Interfaces;
 using Loja.Vendas.Aplicacao.Commands;
@@ -39,7 +40,7 @@ namespace Loja.Venda.Aplicacao.Handler
 
                 _pedidoRepository.Adicionar(pedido);
 
-                // pedido.AdicionarEvento(new PedidoRascunhoIniciadoEvent(message.ClienteId, message.ProdutoId));
+                pedido.AdicionarEvento(new PedidoRascunhoIniciadoEvent(message.ClienteId, message.ProdutoId));
             }
             else
             {
@@ -57,7 +58,7 @@ namespace Loja.Venda.Aplicacao.Handler
                 }
             }
 
-            // pedido.AdicionarEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
+            pedido.AdicionarEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
             return await _pedidoRepository.UnitOfWork.Commit();
         }
 
