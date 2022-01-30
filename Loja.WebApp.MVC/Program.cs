@@ -7,6 +7,7 @@ using Loja.Catalogo.Dominio.Interfaces;
 using Loja.Catalogo.Dominio.Services;
 using Loja.Core.Comunicacao;
 using Loja.Core.Message.Notificacoes;
+using Loja.Venda.Aplicacao.Events;
 using Loja.Venda.Aplicacao.Handler;
 using Loja.Venda.Data.Context;
 using Loja.Venda.Data.Repository;
@@ -74,6 +75,11 @@ builder.Services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, Prod
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
 builder.Services.AddScoped<VendasContext>();
+
+builder.Services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
+
+// Eventos
+builder.Services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
 
 builder.Services.AddScoped<IRequestHandler<AdicionarItemPedidoCommand, bool>, PedidoCommandHandler>();
 
