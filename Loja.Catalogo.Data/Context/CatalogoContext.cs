@@ -1,5 +1,6 @@
 using Loja.Catalogo.Dominio.Entidades;
 using Loja.Core.Data;
+using Loja.Core.Message;
 using Microsoft.EntityFrameworkCore;
 
 namespace Loja.Catalogo.Data.Context
@@ -22,6 +23,9 @@ namespace Loja.Catalogo.Data.Context
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
+
+            // Ignorar evento
+            modelBuilder.Ignore<Evento>();
 
             // Aplica as configurações do banco de dados
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
