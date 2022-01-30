@@ -1,5 +1,6 @@
 using Loja.Core.Comunicacao;
 using Loja.Core.Message;
+using Loja.Core.Message.Notificacoes;
 using Loja.Venda.Dominio.Entidades;
 using Loja.Venda.Dominio.Interfaces;
 using Loja.Vendas.Aplicacao.Commands;
@@ -66,7 +67,7 @@ namespace Loja.Venda.Aplicacao.Handler
 
             foreach (var error in message.ValidationResult.Errors)
             {
-                // _mediatorHandler.PublicarNotificacao(new DomainNotification(message.MessageType, error.ErrorMessage));
+                _mediatorHandler.PublicarNotificacao(new NotificacaoDominio(message.TipoMensagem, error.ErrorMessage));
             }
 
             return false;
