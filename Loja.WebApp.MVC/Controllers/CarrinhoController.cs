@@ -1,8 +1,8 @@
 using Loja.Catalogo.Aplicacao.Services;
 using Loja.Core.Comunicacao;
 using Loja.Core.Message.Notificacoes;
+using Loja.Venda.Aplicacao.Commands;
 using Loja.Venda.Aplicacao.Queries;
-using Loja.Vendas.Aplicacao.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +23,7 @@ namespace Loja.WebApp.MVC.Controllers
         {
             _produtoAppService = produtoAppService;
             _mediatorHandler = mediatorHandler;
+            _pedidoQueries = pedidoQueries;
         }
 
         [Route("meu-carrinho")]

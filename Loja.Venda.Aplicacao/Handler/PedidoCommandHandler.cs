@@ -1,10 +1,10 @@
 using Loja.Core.Comunicacao;
 using Loja.Core.Message;
 using Loja.Core.Message.Notificacoes;
+using Loja.Venda.Aplicacao.Commands;
 using Loja.Venda.Aplicacao.Events;
 using Loja.Venda.Dominio.Entidades;
 using Loja.Venda.Dominio.Interfaces;
-using Loja.Vendas.Aplicacao.Commands;
 using MediatR;
 
 namespace Loja.Venda.Aplicacao.Handler
