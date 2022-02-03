@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+using FluentValidation.Results;
 using Loja.Core.Exceptions;
 using Loja.Core.Interfaces;
 using Loja.Core.ObjetosDominio;
@@ -37,18 +37,20 @@ namespace Loja.Venda.Dominio.Entidades
             _pedidoItems = new List<PedidoItem>();
         }
 
-        // public ValidationResult AplicarVoucher(Voucher voucher)
-        // {
-        //     var validationResult = voucher.ValidarSeAplicavel();
+        public ValidationResult AplicarVoucher(Voucher voucher)
+        {
+            var validationResult = voucher.ValidarSeAplicavel();
 
-        //     if (!validationResult.IsValid) return validationResult;
+            if (!validationResult.IsValid) return validationResult;
 
-        //     Voucher = voucher;
-        //     VoucherUtilizado = true;
-        //     CalcularValorPedido();
+            Voucher = voucher;
 
-        //     return validationResult;
-        // }
+            VoucherUtilizado = true;
+            
+            CalcularValorPedido();
+
+            return validationResult;
+        }
 
         public void CalcularValorPedido()
         {
