@@ -1,7 +1,7 @@
 using FluentValidation;
 using Loja.Core.Message;
 
-namespace Loja.Vendas.Aplicacao.Commands
+namespace Loja.Venda.Aplicacao.Commands
 {
     public class AdicionarItemPedidoCommand : Comando
     {
