@@ -3,6 +3,7 @@ using Loja.Core.Comunicacao;
 using Loja.Core.Message.Notificacoes;
 using Loja.Venda.Aplicacao.Commands;
 using Loja.Venda.Aplicacao.Queries;
+using Loja.Venda.Aplicacao.Queries.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,11 +27,13 @@ namespace Loja.WebApp.MVC.Controllers
             _pedidoQueries = pedidoQueries;
         }
 
+
         [Route("meu-carrinho")]
         public async Task<IActionResult> Index()
         {
             return View(await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
         }
+
 
         [HttpPost]
         [Route("meu-carrinho")]
@@ -63,6 +66,7 @@ namespace Loja.WebApp.MVC.Controllers
             return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
         }
 
+
         [HttpPost]
         [Route("remover-item")]
         public async Task<IActionResult> RemoverItem(Guid id)
@@ -82,6 +86,7 @@ namespace Loja.WebApp.MVC.Controllers
 
             return View("Index", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
         }
+
 
         [HttpPost]
         [Route("atualizar-item")]
@@ -103,6 +108,7 @@ namespace Loja.WebApp.MVC.Controllers
             return View("Index", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
         }
 
+
         [HttpPost]
         [Route("aplicar-voucher")]
         public async Task<IActionResult> AplicarVoucher(string voucherCodigo)
@@ -118,5 +124,32 @@ namespace Loja.WebApp.MVC.Controllers
 
             return View("Index", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
         } 
+
+
+        [Route("resumo-da-compra")]
+        public async Task<IActionResult> ResumoDaCompra()
+        {
+            return View(await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
+        }
+
+
+        [HttpPost]
+        [Route("iniciar-pedido")]
+        public async Task<IActionResult> IniciarPedido(CarrinhoViewModel carrinhoViewModel)
+        {
+            var carrinho = await _pedidoQueries.ObterCarrinhoCliente(ClienteId);
+
+            var command = new IniciarPedidoCommand(carrinho.PedidoId, ClienteId, carrinho.ValorTotal, carrinhoViewModel.Pagamento.NomeCartao,
+                carrinhoViewModel.Pagamento.NumeroCartao, carrinhoViewModel.Pagamento.ExpiracaoCartao, carrinhoViewModel.Pagamento.CvvCartao);
+
+            await _mediatorHandler.EnviarComando(command);
+
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index", "Pedido");
+            }
+
+            return View("ResumoDaCompra", await _pedidoQueries.ObterCarrinhoCliente(ClienteId));
+        }
     }
 }
