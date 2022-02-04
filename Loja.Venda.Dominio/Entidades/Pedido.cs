@@ -18,6 +18,7 @@ namespace Loja.Venda.Dominio.Entidades
         public PedidoStatus PedidoStatus { get; private set; }
 
         private readonly List<PedidoItem> _pedidoItems;
+        
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
 
         // EF Rel.
