@@ -1,4 +1,3 @@
-using Loja.Core.Message;
 using Loja.Core.Message.MensagensComum.EventoDeDominio;
 
 namespace Loja.Catalogo.Dominio.Events
