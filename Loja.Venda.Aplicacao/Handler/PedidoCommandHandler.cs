@@ -1,7 +1,10 @@
 using Loja.Core.Comunicacao;
 using Loja.Core.Exceptions;
+using Loja.Core.Extensions;
 using Loja.Core.Message;
+using Loja.Core.Message.MensagensComum.EventoDeIntegracao;
 using Loja.Core.Message.Notificacoes;
+using Loja.Core.ObjetosDominio.DTO;
 using Loja.Venda.Aplicacao.Commands;
 using Loja.Venda.Aplicacao.Events;
 using Loja.Venda.Dominio.Entidades;
@@ -14,7 +17,8 @@ namespace Loja.Venda.Aplicacao.Handler
         IRequestHandler<AdicionarItemPedidoCommand, bool>,
         IRequestHandler<AtualizarItemPedidoCommand, bool>,
         IRequestHandler<RemoverItemPedidoCommand, bool>,
-        IRequestHandler<AplicarVoucherPedidoCommand, bool>
+        IRequestHandler<AplicarVoucherPedidoCommand, bool>,
+        IRequestHandler<IniciarPedidoCommand, bool>
     {
         private readonly IPedidoRepository _pedidoRepository;
         private readonly IMediatorHandler _mediatorHandler;
@@ -63,6 +67,7 @@ namespace Loja.Venda.Aplicacao.Handler
             }
 
             pedido.AdicionarEvento(new PedidoItemAdicionadoEvent(pedido.ClienteId, pedido.Id, message.ProdutoId, message.Nome, message.ValorUnitario, message.Quantidade));
+            
             return await _pedidoRepository.UnitOfWork.Commit();
         }
 
@@ -75,6 +80,7 @@ namespace Loja.Venda.Aplicacao.Handler
             if (pedido == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new NotificacaoDominio("pedido", "Pedido não encontrado!"));
+
                 return false;
             }
 
@@ -83,6 +89,7 @@ namespace Loja.Venda.Aplicacao.Handler
             if (!pedido.PedidoItemExistente(pedidoItem))
             {
                 await _mediatorHandler.PublicarNotificacao(new NotificacaoDominio("pedido", "Item do pedido não encontrado!"));
+
                 return false;
             }
 
@@ -106,6 +113,7 @@ namespace Loja.Venda.Aplicacao.Handler
             if (pedido == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new NotificacaoDominio("pedido", "Pedido não encontrado!"));
+
                 return false;
             }
 
@@ -118,9 +126,11 @@ namespace Loja.Venda.Aplicacao.Handler
             }
 
             pedido.RemoverItem(pedidoItem);
+
             pedido.AdicionarEvento(new PedidoProdutoRemovidoEvent(message.ClienteId, pedido.Id, message.ProdutoId));
 
             _pedidoRepository.RemoverItem(pedidoItem);
+
             _pedidoRepository.Atualizar(pedido);
 
             return await _pedidoRepository.UnitOfWork.Commit();
@@ -135,6 +145,7 @@ namespace Loja.Venda.Aplicacao.Handler
             if (pedido == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new NotificacaoDominio("pedido", "Pedido não encontrado!"));
+
                 return false;
             }
 
@@ -143,10 +154,12 @@ namespace Loja.Venda.Aplicacao.Handler
             if (voucher == null)
             {
                 await _mediatorHandler.PublicarNotificacao(new NotificacaoDominio("pedido", "Voucher não encontrado!"));
+
                 return false;
             }
 
             var voucherAplicacaoValidation = pedido.AplicarVoucher(voucher);
+
             if (!voucherAplicacaoValidation.IsValid)
             {
                 foreach (var error in voucherAplicacaoValidation.Errors)
@@ -158,6 +171,27 @@ namespace Loja.Venda.Aplicacao.Handler
             }
 
             pedido.AdicionarEvento(new VoucherAplicadoPedidoEvent(message.ClienteId, pedido.Id, voucher.Id));
+
+            _pedidoRepository.Atualizar(pedido);
+
+            return await _pedidoRepository.UnitOfWork.Commit();
+        }
+
+        public async Task<bool> Handle(IniciarPedidoCommand message, CancellationToken cancellationToken)
+        {
+            if (!ValidarComando(message)) return false;
+
+            var pedido = await _pedidoRepository.ObterPedidoRascunhoPorClienteId(message.ClienteId);
+            
+            pedido.IniciarPedido();
+
+            var itensList = new List<Item>();
+
+            pedido.PedidoItems.ForEach(i => itensList.Add(new Item { Id = i.ProdutoId, Quantidade = i.Quantidade }));
+            
+            var listaProdutosPedido = new ListaProdutosPedido { PedidoId = pedido.Id, Itens = itensList };
+
+            pedido.AdicionarEvento(new PedidoIniciadoEvent(pedido.Id, pedido.ClienteId, listaProdutosPedido, pedido.ValorTotal, message.NomeCartao, message.NumeroCartao, message.ExpiracaoCartao, message.CvvCartao));
 
             _pedidoRepository.Atualizar(pedido);
 
