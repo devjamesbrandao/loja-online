@@ -1,4 +1,5 @@
 using Loja.Core.Message;
+using Loja.Core.Message.MensagensComum.EventoDeDominio;
 using Loja.Core.Message.Notificacoes;
 using MediatR;
 
@@ -24,6 +25,11 @@ namespace Loja.Core.Comunicacao
         }
 
         public async Task PublicarNotificacao<T>(T notificacao) where T : NotificacaoDominio
+        {
+            await _mediator.Publish(notificacao);
+        }
+
+        public async Task PublicarEventoDominio<T>(T notificacao) where T : EventoDominio
         {
             await _mediator.Publish(notificacao);
         }
