@@ -7,6 +7,7 @@ namespace Loja.Core.ObjetosDominio
         public Guid Id { get; set; }
 
         private List<Evento> _notificacoes;
+        
         public IReadOnlyCollection<Evento> Notificacoes => _notificacoes?.AsReadOnly();
 
         protected Entidade()
