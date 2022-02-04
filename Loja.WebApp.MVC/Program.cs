@@ -2,10 +2,11 @@ using Loja.Catalogo.Aplicacao.Automapper;
 using Loja.Catalogo.Aplicacao.Services;
 using Loja.Catalogo.Data.Context;
 using Loja.Catalogo.Data.Repository;
+using Loja.Catalogo.Dominio;
 using Loja.Catalogo.Dominio.Events;
 using Loja.Catalogo.Dominio.Interfaces;
-using Loja.Catalogo.Dominio.Services;
 using Loja.Core.Comunicacao;
+using Loja.Core.Message.MensagensComum.EventoDeIntegracao;
 using Loja.Core.Message.Notificacoes;
 using Loja.Venda.Aplicacao.Commands;
 using Loja.Venda.Aplicacao.Events;
@@ -72,6 +73,8 @@ builder.Services.AddScoped<CatalogoContext>();
 
 builder.Services.AddScoped<INotificationHandler<ProdutoAbaixoEstoqueEvent>, ProdutoEventoHandler>();
 
+builder.Services.AddScoped<INotificationHandler<PedidoIniciadoEvent>, ProdutoEventoHandler>();
+
 // Vendas
 builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
@@ -86,6 +89,8 @@ builder.Services.AddScoped<IRequestHandler<AtualizarItemPedidoCommand, bool>, Pe
 builder.Services.AddScoped<IRequestHandler<RemoverItemPedidoCommand, bool>, PedidoCommandHandler>();
 
 builder.Services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoCommandHandler>();
+
+builder.Services.AddScoped<IRequestHandler<IniciarPedidoCommand, bool>, PedidoCommandHandler>();
 
 // Eventos
 builder.Services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
