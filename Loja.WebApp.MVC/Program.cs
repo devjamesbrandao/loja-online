@@ -8,6 +8,14 @@ using Loja.Catalogo.Dominio.Interfaces;
 using Loja.Core.Comunicacao;
 using Loja.Core.Message.MensagensComum.EventoDeIntegracao;
 using Loja.Core.Message.Notificacoes;
+using Loja.Pagamento.Anticorrupcao.Facade;
+using Loja.Pagamento.Anticorrupcao.Interfaces;
+using Loja.Pagamento.Anticorrupcao.Services;
+using Loja.Pagamento.Data.Context;
+using Loja.Pagamento.Data.Repository;
+using Loja.Pagamento.Dominio.Eventos;
+using Loja.Pagamento.Dominio.Interfaces;
+using Loja.Pagamento.Dominio.Services;
 using Loja.Venda.Aplicacao.Commands;
 using Loja.Venda.Aplicacao.Events;
 using Loja.Venda.Aplicacao.Handler;
@@ -39,14 +47,19 @@ builder.Services.AddDbContext<ApplicationDbContext>(
 builder.Services.AddDbContext<CatalogoContext>(
     options => {
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
-        options.EnableSensitiveDataLogging();
     }
 );
 
 builder.Services.AddDbContext<VendasContext>(
     options => {
         options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
-        options.EnableSensitiveDataLogging();
+    }
+);
+
+
+builder.Services.AddDbContext<PagamentoContext>(
+    options => {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
     }
 );
 
@@ -91,6 +104,27 @@ builder.Services.AddScoped<IRequestHandler<RemoverItemPedidoCommand, bool>, Pedi
 builder.Services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoCommandHandler>();
 
 builder.Services.AddScoped<IRequestHandler<IniciarPedidoCommand, bool>, PedidoCommandHandler>();
+
+// builder.Services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
+
+// builder.Services.AddScoped<INotificationHandler<PedidoPagamentoRealizadoEvent>, PedidoEventHandler>();
+
+// builder.Services.AddScoped<INotificationHandler<PedidoPagamentoRecusadoEvent>, PedidoEventHandler>();
+
+// Pagamento
+builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
+
+builder.Services.AddScoped<IPagamentoService, PagamentoService>();
+
+builder.Services.AddScoped<IPagamentoCartaoCreditoFacade, PagamentoCartaoCreditoFacade>();
+
+builder.Services.AddScoped<IPayPalGateway, PayPalGateway>();
+
+builder.Services.AddScoped<IConfigurationManager, Loja.Pagamento.Anticorrupcao.Services.ConfigurationManager>();
+
+builder.Services.AddScoped<PagamentoContext>();
+
+builder.Services.AddScoped<INotificationHandler<PedidoEstoqueConfirmadoEvent>, PagamentoEventHandler>();
 
 // Eventos
 builder.Services.AddScoped<INotificationHandler<PedidoRascunhoIniciadoEvent>, PedidoEventHandler>();
