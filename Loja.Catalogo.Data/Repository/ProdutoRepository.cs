@@ -1,7 +1,9 @@
+using Dapper.Contrib.Extensions;
 using Loja.Catalogo.Data.Context;
 using Loja.Catalogo.Dominio.Entidades;
 using Loja.Catalogo.Dominio.Interfaces;
 using Loja.Core.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Loja.Catalogo.Data.Repository
@@ -18,6 +20,7 @@ namespace Loja.Catalogo.Data.Repository
 
         public async Task<IEnumerable<Produto>> ObterTodos()
         {
+            await Teste();
             return await _context.Produtos.AsNoTracking().ToListAsync();
         }
 
@@ -63,9 +66,38 @@ namespace Loja.Catalogo.Data.Repository
             _context.Categorias.Update(categoria);
         }
 
+        public async Task Teste()
+        {
+            using(var connection = new SqlConnection(_context.Database.GetConnectionString()))
+            {
+                connection.Open();
+
+                var t = new Teste
+                {
+                    Va = 1,
+                    data = DateTime.Now
+                };
+
+                await connection.InsertAsync(t);
+            }
+        }
+
         public void Dispose()
         {
             _context?.Dispose();
         }
+    }
+
+
+    [Table("Teste")]
+    public class Teste
+    {
+        public int? id {get; set;}
+
+        public int Va {get; set;}
+
+        public DateTime? data {get; set;}
+
+        public string Text {get; set;}
     }
 }
