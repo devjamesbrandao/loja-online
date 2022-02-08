@@ -105,11 +105,11 @@ builder.Services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, P
 
 builder.Services.AddScoped<IRequestHandler<IniciarPedidoCommand, bool>, PedidoCommandHandler>();
 
-// builder.Services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
+builder.Services.AddScoped<INotificationHandler<PedidoEstoqueRejeitadoEvent>, PedidoEventHandler>();
 
-// builder.Services.AddScoped<INotificationHandler<PedidoPagamentoRealizadoEvent>, PedidoEventHandler>();
+builder.Services.AddScoped<INotificationHandler<PedidoPagamentoRealizadoEvent>, PedidoEventHandler>();
 
-// builder.Services.AddScoped<INotificationHandler<PedidoPagamentoRecusadoEvent>, PedidoEventHandler>();
+builder.Services.AddScoped<INotificationHandler<PedidoPagamentoRecusadoEvent>, PedidoEventHandler>();
 
 // Pagamento
 builder.Services.AddScoped<IPagamentoRepository, PagamentoRepository>();
