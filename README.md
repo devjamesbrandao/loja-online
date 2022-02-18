@@ -2,22 +2,51 @@
 
 <hr/>
 
-<!-- <p align="center">
-    <img src="https://j.gifs.com/z6XvVq.gif" alt="Demonstração sistema de geração de currículos" title="Curriculum-Generator">
-</p> -->
+<p align="center">
+    <img src="https://github.com/devjamesbrandao/LojaOnline/blob/main/context-map.png" alt="Context Map of aplication" title="Online shopp">
+</p> 
 
-### `Sobre`
+<p align="center">
+    <img src="https://github.com/devjamesbrandao/LojaOnline/blob/main/cqrs.png" alt="Image CQRS" title="Online shopp">
+</p> 
+
+
+### `About`
 
 <p align="justify">Este projeto é uma loja online fictícia. O intuito é demonstrar as <i>skills</i>
-desenvolvidas no curso de modelagem de domínios ricos, a plataforma desenvolvedor.io. </p>
+aprendidas no curso de modelagem de domínios ricos, na plataforma desenvolvedor.io. </p>
+
+### ` 💡 Tópicos abordados`
+
+* Domain Driven Design (DDD) na prática 
+* Context Map
+* Command Query Responsibility Segregation (CQRS)
+* Event Driven
+* Event Sourcing
+* Modelagem de domínios ricos em C#
+* SOLID, Clean Code e Clean Architecture em C#
+* Padrão Repository Pattern
+* Native Dependency Injection em C#
+* POO em C#
+* Xtreme Programming
+* Entity Framework Core (EF)
+* AutoMapper
+* MediatR
 
 ### `💻 Ferramentas`
 
-#### Front-end
+#### Front-end, Back-end, versionamento e desenvolvimento
 * HTML 5
 * CSS 3
 * Javascript
-* Blazor
+* ASP NET CORE MVC
+* SQL SERVER
+* DOCKER
+* BOOTSTRAP
+* VS CODE
+* Git Hub
+* Windows 10 PRO
+* ASP NET CORE 6.0
 
 ### `🔎 Como usar`
 
@@ -26,3 +55,7 @@ desenvolvidas no curso de modelagem de domínios ricos, a plataforma desenvolved
 <p>$ dotnet restore</p>
 
 <p>$ dotnet build</p>
+
+<p>$ criar banco de dados e adicionar em AppSettings.json a CONNECTION STRING</p>
+
+<p>$ dotnet run</p>
