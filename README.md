@@ -16,7 +16,7 @@
 <p align="justify">This project is a fictitious online store. The intent is to demonstrate the <i>skills</i>
 learned in the rich domain modeling course, on the desenvolvedor.io platform. Link: https://desenvolvedor.io/curso-online-modelagem-de-dominios-ricos</p>
 
-### ` 💡 Tópicos abordados`
+### ` 💡 Topics Covered`
 
 * Domain Driven Design (DDD) in practice 
 * Context Map
@@ -33,9 +33,9 @@ learned in the rich domain modeling course, on the desenvolvedor.io platform. Li
 * AutoMapper
 * MediatR
 
-### `💻 Ferramentas`
+### `💻 Tools`
 
-#### Front-end, Back-end, versionamento e desenvolvimento
+#### Front-end, Back-end, versioning and development
 * HTML 5
 * CSS 3
 * Javascript
@@ -48,7 +48,7 @@ learned in the rich domain modeling course, on the desenvolvedor.io platform. Li
 * Windows 10 PRO
 * ASP NET CORE 6.0
 
-### `🔎 Como usar`
+### `🔎 How to use?`
 
 <p>$ git clone https://github.com/devjamesbrandao/LojaOnline</p>
 
@@ -56,6 +56,6 @@ learned in the rich domain modeling course, on the desenvolvedor.io platform. Li
 
 <p>$ dotnet build</p>
 
-<p>$ create database and add in AppSettings.json the CONNECTION STRING</p>
+<p>$ create database in Sql Server and add in AppSettings.json the CONNECTION STRING</p>
 
 <p>$ dotnet run</p>
