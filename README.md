@@ -1,4 +1,4 @@
-<h1 align="center"><strong>Loja Online</strong></h1>
+<h1 align="center"><strong>Online Shopp</strong></h1>
 
 <hr/>
 
@@ -11,23 +11,23 @@
 </p> 
 
 
-### `About`
+### ` 🔍 About`
 
-<p align="justify">Este projeto é uma loja online fictícia. O intuito é demonstrar as <i>skills</i>
-aprendidas no curso de modelagem de domínios ricos, na plataforma desenvolvedor.io. </p>
+<p align="justify">This project is a fictitious online store. The intent is to demonstrate the <i>skills</i>
+learned in the rich domain modeling course, on the desenvolvedor.io platform. Link: https://desenvolvedor.io/curso-online-modelagem-de-dominios-ricos</p>
 
 ### ` 💡 Tópicos abordados`
 
-* Domain Driven Design (DDD) na prática 
+* Domain Driven Design (DDD) in practice 
 * Context Map
 * Command Query Responsibility Segregation (CQRS)
 * Event Driven
 * Event Sourcing
-* Modelagem de domínios ricos em C#
-* SOLID, Clean Code e Clean Architecture em C#
-* Padrão Repository Pattern
-* Native Dependency Injection em C#
-* POO em C#
+* Rich Domain Modeling in C#
+* SOLID, Clean Code and Clean Architecture in C#
+* Standard Repository Pattern
+* Native Dependency Injection in C#
+* POO in C#
 * Xtreme Programming
 * Entity Framework Core (EF)
 * AutoMapper
@@ -56,6 +56,6 @@ aprendidas no curso de modelagem de domínios ricos, na plataforma desenvolvedor
 
 <p>$ dotnet build</p>
 
-<p>$ criar banco de dados e adicionar em AppSettings.json a CONNECTION STRING</p>
+<p>$ create database and add in AppSettings.json the CONNECTION STRING</p>
 
 <p>$ dotnet run</p>
